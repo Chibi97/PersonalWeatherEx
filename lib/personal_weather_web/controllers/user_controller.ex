@@ -1,4 +1,4 @@
-defmodule PersonalWeatherWeb.PageController do
+defmodule PersonalWeatherWeb.UserController do
   use PersonalWeatherWeb, :controller
 
   def index(conn, _params) do
