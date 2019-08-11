@@ -3,11 +3,9 @@ defmodule PersonalWeatherWeb.AuthController do
 
   alias PersonalWeather.Accounts
   alias PersonalWeather.Guardian
+  import PersonalWeatherWeb.Controllers.Utils
 
   def login(conn, %{"email" => email, "password" => password}) do
-
-    IO.inspect("DA LI PRICAM SA NEKIM?: #{inspect(conn.assigns.current_user)}")
-
     email
     |> Accounts.login_by_email_and_password(password)
     |> _result_to_jwt
@@ -32,16 +30,4 @@ defmodule PersonalWeatherWeb.AuthController do
     conn |> put_status(400) |> json(%{errors: errors})
   end
   defp _complete_request(_err, conn), do: conn |> put_status(403) |> json(%{message: "Invalid email/password"})
-
-  # TODO: move it to Utils module, and this one should be public
-  defp translate(changeset) do
-    Ecto.Changeset.traverse_errors(changeset, &_translate_error/1)
-  end
-
-  defp _translate_error({message, opts}) do
-    case opts[:count] do
-      nil -> Gettext.dgettext(PersonalWeatherWeb.Gettext, "errors", message, opts)
-      count -> Gettext.dngettext(PersonalWeatherWeb.Gettext, "errors", message, message, count, opts)
-    end
-  end
 end

@@ -11,12 +11,17 @@ defmodule PersonalWeatherWeb.Plugs.Authorization do
 
   # THIS IS A FUNCTIONAL PLUG!
   def authenticate(conn, _opts) do
-    if conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> halt()
-      |> send_resp(403, "{\"message\":\"Not Authorized\"}")
+    cond do
+      conn.assigns.current_user && conn.assigns.current_user.is_active ->
+        conn
+      conn.assigns.current_user ->
+        conn
+        |> halt()
+        |> send_resp(403, Jason.encode!(%{message: "Please activate your account first!"}))
+      true ->
+        conn
+        |> halt()
+        |> send_resp(403, Jason.encode!(%{message: "Not Authorized"}))
     end
   end
 

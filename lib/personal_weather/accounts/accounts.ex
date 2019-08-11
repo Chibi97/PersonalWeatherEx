@@ -12,7 +12,6 @@ defmodule PersonalWeather.Accounts do
   def find_by_email(email) do
     User
     |> where([u], u.email == ^email)
-    |> where([u], u.is_active == true)
     |> Repo.one()
   end
 
