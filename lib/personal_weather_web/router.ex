@@ -1,6 +1,6 @@
 defmodule PersonalWeatherWeb.Router do
   use PersonalWeatherWeb, :router
-  alias PersonalWeatherWeb.Plugs.Authorization;
+  alias PersonalWeatherWeb.Plugs.Authorization
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -12,7 +12,7 @@ defmodule PersonalWeatherWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    # plug Authorization
+    plug Authorization
   end
 
   scope "/", PersonalWeatherWeb do

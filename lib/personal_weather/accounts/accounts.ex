@@ -28,4 +28,5 @@ defmodule PersonalWeather.Accounts do
         {:error, :not_found}
     end
   end
+
 end
