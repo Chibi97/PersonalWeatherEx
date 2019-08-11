@@ -1,5 +1,6 @@
 defmodule PersonalWeatherWeb.Router do
   use PersonalWeatherWeb, :router
+  alias PersonalWeatherWeb.Plugs.Authorization;
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,7 @@ defmodule PersonalWeatherWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    # plug Authorization
   end
 
   scope "/", PersonalWeatherWeb do
@@ -22,8 +24,9 @@ defmodule PersonalWeatherWeb.Router do
   # Other scopes may use custom stacks.
    scope "/api", PersonalWeatherWeb do
       pipe_through :api
-      # pipe_through :authorization
 
-      resources "/", UserController
+      resources "/weather", WeatherController
+      post "/auth/login", AuthController, :login
+      post "/auth/register", AuthController, :register
   end
 end

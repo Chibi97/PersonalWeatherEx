@@ -8,11 +8,10 @@ defmodule PersonalWeather.Accounts.User do
     field :last_name, :string
     field :email, :string
     field :password_hash, :string
-    field :password, :string, virutal: true
+    field :password, :string, virtual: true
     field :is_active, :boolean, default: false
     timestamps()
   end
-
 
   def changeset(%User{} = user, attrs \\ %{}) do
     rePass = ~r/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
@@ -27,6 +26,11 @@ defmodule PersonalWeather.Accounts.User do
     |> validate_length(:password, min: 8, max: 50)
     |> validate_format(:password, rePass)
     |> validate_format(:email, reMail)
-    # |> put_password_hash()
+    |> put_password_hash()
   end
+
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Bcrypt.add_hash(password))
+  end
+  defp put_password_hash(changeset), do: changeset
 end

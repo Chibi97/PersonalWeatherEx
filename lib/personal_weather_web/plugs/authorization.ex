@@ -6,10 +6,10 @@ defmodule PersonalWeatherWeb.Plugs.Authorization do
 
   def call(conn, opts) do
     IO.inspect opts
-    _get_from_guardian(conn, opts)
+     _identify_user(conn, opts)
   end
 
-  defp _get_from_guardian(conn, %{"secret" => jwt}) do
+  defp _identify_user(conn, %{"secret" => jwt}) do
     case Guardian.decode_and_verify(jwt) do
       {:ok, claims} ->
         case Guardian.resource_from_claims(claims) do
