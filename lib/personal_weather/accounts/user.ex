@@ -27,5 +27,6 @@ defmodule PersonalWeather.Accounts.User do
     |> validate_length(:password, min: 8, max: 50)
     |> validate_format(:password, rePass)
     |> validate_format(:email, reMail)
+    # |> put_password_hash()
   end
 end

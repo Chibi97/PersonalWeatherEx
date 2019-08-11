@@ -10,6 +10,10 @@ use Mix.Config
 config :personal_weather,
   ecto_repos: [PersonalWeather.Repo]
 
+config :personal_weather, PersonalWeatherWeb.Guardian,
+  issuer: "personal_weather",
+  secret_key: "a4lUj3EpwbqpfyfGdnP71oOabcP9FvHI4CURwvwJOllqUbKY8fzcZeryVzAVOaFn"
+
 # Configures the endpoint
 config :personal_weather, PersonalWeatherWeb.Endpoint,
   url: [host: "localhost"],
