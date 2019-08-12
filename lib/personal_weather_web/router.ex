@@ -16,7 +16,7 @@ defmodule PersonalWeatherWeb.Router do
   scope "/", PersonalWeatherWeb do
     pipe_through :browser
 
-    # get "/", PageController, :index
+    get "/*anything", PageController, :index
   end
 
   # Other scopes may use custom stacks.
