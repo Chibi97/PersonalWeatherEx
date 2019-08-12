@@ -45,7 +45,8 @@ defmodule PersonalWeather.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:guardian, "~> 1.2"},
       {:comeonin, "~> 5.1"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:httpoison, "~> 1.4"}
     ]
   end
 

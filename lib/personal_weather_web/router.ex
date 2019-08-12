@@ -31,5 +31,10 @@ defmodule PersonalWeatherWeb.Router do
       post "/login", AuthController, :login
       post "/register", AuthController, :register
     end
+
+    scope "/cities" do
+      get "/autocomplete/:term", LocationController, :autocomplete
+    end
+
   end
 end
