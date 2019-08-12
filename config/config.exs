@@ -10,10 +10,6 @@ use Mix.Config
 config :personal_weather,
   ecto_repos: [PersonalWeather.Repo]
 
-config :personal_weather, PersonalWeather.Guardian,
-  issuer: "personal_weather",
-  secret_key: "a4lUj3EpwbqpfyfGdnP71oOabcP9FvHI4CURwvwJOllqUbKY8fzcZeryVzAVOaFn"
-
 # Configures the endpoint
 config :personal_weather, PersonalWeatherWeb.Endpoint,
   url: [host: "localhost"],
@@ -32,3 +28,4 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+import_config "env.secret.exs"

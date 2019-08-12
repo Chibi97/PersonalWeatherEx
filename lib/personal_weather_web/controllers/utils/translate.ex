@@ -5,8 +5,11 @@ defmodule PersonalWeatherWeb.Controllers.Utils do
 
   defp _translate_error({message, opts}) do
     case opts[:count] do
-      nil -> Gettext.dgettext(PersonalWeatherWeb.Gettext, "errors", message, opts)
-      count -> Gettext.dngettext(PersonalWeatherWeb.Gettext, "errors", message, message, count, opts)
+      nil ->
+        Gettext.dgettext(PersonalWeatherWeb.Gettext, "errors", message, opts)
+
+      count ->
+        Gettext.dngettext(PersonalWeatherWeb.Gettext, "errors", message, message, count, opts)
     end
   end
 end

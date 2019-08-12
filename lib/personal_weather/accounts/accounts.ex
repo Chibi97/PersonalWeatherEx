@@ -6,7 +6,7 @@ defmodule PersonalWeather.Accounts do
   def create(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
-    |> Repo.insert
+    |> Repo.insert()
   end
 
   def find_by_email(email) do
@@ -17,15 +17,17 @@ defmodule PersonalWeather.Accounts do
 
   def login_by_email_and_password(email, password) do
     user = find_by_email(email)
+
     cond do
       user && Bcrypt.verify_pass(password, user.password_hash) ->
         {:ok, user}
+
       user ->
         {:error, :bad_password}
+
       true ->
         Bcrypt.no_user_verify()
         {:error, :not_found}
     end
   end
-
 end

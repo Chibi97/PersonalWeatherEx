@@ -22,11 +22,14 @@ defmodule PersonalWeatherWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-   scope "/api", PersonalWeatherWeb do
-      pipe_through :api
+  scope "/api", PersonalWeatherWeb do
+    pipe_through :api
 
-      resources "/weather", WeatherController
-      post "/auth/login", AuthController, :login
-      post "/auth/register", AuthController, :register
+    resources "/weather", WeatherController
+
+    scope "/auth" do
+      post "/login", AuthController, :login
+      post "/register", AuthController, :register
+    end
   end
 end
