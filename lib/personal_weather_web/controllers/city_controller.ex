@@ -1,6 +1,7 @@
 defmodule PersonalWeatherWeb.CityController do
   use PersonalWeatherWeb, :controller
   alias PersonalWeather.AccuWeather.Client
+  alias PersonalWeather.SubscriptionCities.SubscriptionCities
 
   plug :authenticate
 
@@ -10,10 +11,14 @@ defmodule PersonalWeatherWeb.CityController do
     json(conn, resp)
   end
 
-  def subscribe(conn, %{"city"=> _, "until" => _} = _params)  do
-
-    # /api/cities { "city": "Belgrade", "until" "2020/y" }
-    resp = ""
-    json(conn, resp)
+  def subscribe(conn, params)  do
+    case SubscriptionCities.create(conn.assigns.current_user.id, params) do
+      {:ok, _} -> json(conn, %{"msg" => "success"})
+      {:error, changeset} ->
+        errors = translate(changeset)
+        conn
+          |> put_status(400)
+          |> json(%{errors: errors})
+    end
   end
 end

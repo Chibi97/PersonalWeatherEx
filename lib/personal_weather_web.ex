@@ -24,6 +24,7 @@ defmodule PersonalWeatherWeb do
       import Plug.Conn
       import PersonalWeatherWeb.Gettext
       import PersonalWeatherWeb.Plugs.Authorization, only: [authenticate: 2]
+      import PersonalWeatherWeb.Controllers.Utils
       alias PersonalWeatherWeb.Router.Helpers, as: Routes
     end
   end

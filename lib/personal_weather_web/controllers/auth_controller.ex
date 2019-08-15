@@ -3,7 +3,6 @@ defmodule PersonalWeatherWeb.AuthController do
 
   alias PersonalWeather.Accounts
   alias PersonalWeather.Guardian
-  import PersonalWeatherWeb.Controllers.Utils
 
   def login(conn, %{"email" => email, "password" => password}) do
     email

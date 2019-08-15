@@ -1,4 +1,4 @@
-defmodule PersonalWeather.SubscriptionCities do
+defmodule PersonalWeather.SubscriptionCities.SubscriptionCities do
   alias PersonalWeather.SubscriptionCities.SubscriptionCity
   alias PersonalWeather.Repo
 
@@ -9,4 +9,3 @@ defmodule PersonalWeather.SubscriptionCities do
   end
 end
 
-# create(conn.assigns.current_user,  params)
