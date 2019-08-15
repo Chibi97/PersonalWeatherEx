@@ -3,7 +3,7 @@ defmodule PersonalWeather.RequestClient do
 
   def request(:get, url, opts) do
     query_params = Keyword.get(opts, :query_params, %{})
-    HTTPoison.get! "#{url}?#{_encode(query_params)}"
+    HTTPoison.get!("#{url}?#{_encode(query_params)}")
   end
 
   def request(:post, url, opts) do
@@ -24,5 +24,4 @@ defmodule PersonalWeather.RequestClient do
   end
 
   defp _encode(map), do: URI.encode_query(map)
-
 end

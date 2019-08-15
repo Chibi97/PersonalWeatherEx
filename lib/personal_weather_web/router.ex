@@ -35,6 +35,5 @@ defmodule PersonalWeatherWeb.Router do
     scope "/cities" do
       get "/autocomplete/:term", LocationController, :autocomplete
     end
-
   end
 end
