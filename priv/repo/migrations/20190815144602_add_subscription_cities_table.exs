@@ -9,7 +9,6 @@ defmodule PersonalWeather.Repo.Migrations.AddSubscriptionCitiesTable do
       timestamps()
     end
 
-    create unique_index(:subscription_cities, [:city_id])
-    create unique_index(:subscription_cities, [:user_id])
+    create unique_index(:subscription_cities, [:city_id, :user_id])
   end
 end
