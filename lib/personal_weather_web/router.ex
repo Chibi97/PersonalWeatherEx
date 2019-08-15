@@ -15,12 +15,6 @@ defmodule PersonalWeatherWeb.Router do
     plug Authorization
   end
 
-  scope "/", PersonalWeatherWeb do
-    pipe_through :browser
-
-    get "/*anything", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
   scope "/api", PersonalWeatherWeb do
     pipe_through :api
@@ -33,7 +27,14 @@ defmodule PersonalWeatherWeb.Router do
     end
 
     scope "/cities" do
-      get "/autocomplete/:term", LocationController, :autocomplete
+      post "/", CityController, :subscribe
+      get "/autocomplete/:term", CityController, :autocomplete
     end
+  end
+
+  scope "/", PersonalWeatherWeb do
+    pipe_through :browser
+
+    get "/*anything", PageController, :index
   end
 end

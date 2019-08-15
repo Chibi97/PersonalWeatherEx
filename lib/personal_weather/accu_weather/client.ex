@@ -4,6 +4,10 @@ defmodule PersonalWeather.AccuWeather.Client do
 
   alias PersonalWeather.RequestClient
 
+  def find_city_by_id(city) do
+    city # ........
+  end
+
   def autocomplete_city(city) do
     RequestClient.request(:get, "#{@url_base}/locations/v1/cities/autocomplete",
       query_params: %{q: city, apikey: @api_key}
@@ -26,4 +30,5 @@ defmodule PersonalWeather.AccuWeather.Client do
   end
 
   defp _process_response(_, default, _), do: default
+
 end
