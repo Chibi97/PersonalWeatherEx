@@ -22,12 +22,16 @@ defmodule PersonalWeatherWeb.AuthController do
     {:ok, token, _} = Guardian.encode_and_sign(user, %{}, ttl: {7, :days})
     {:ok, %{token: token}}
   end
+
   defp _result_to_jwt(error), do: error
 
   defp _complete_request({:ok, response}, conn), do: json(conn, response)
+
   defp _complete_request({:error, %Ecto.Changeset{} = changeset}, conn) do
     errors = translate(changeset)
     conn |> put_status(400) |> json(%{errors: errors})
   end
-  defp _complete_request(_err, conn), do: conn |> put_status(403) |> json(%{message: "Invalid email/password"})
+
+  defp _complete_request(_err, conn),
+    do: conn |> put_status(403) |> json(%{message: "Invalid email/password"})
 end
